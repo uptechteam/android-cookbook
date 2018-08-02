@@ -70,7 +70,7 @@ In our case the *Presenters* use the Domain’s *Use Cases* and, if needed, othe
 In your project you can either write everything from scratch or use some boilerplate code (like [this one](https://github.com/bufferapp/android-clean-architecture-boilerplate)). It’s up to you, but please keep in mind that boilerplate can sometimes harm flexibility.
 Here are some samples to get you started:
 * [Fernando Cejas’ sample](https://github.com/android10/Android-CleanArchitecture);
-* [sample by Anton Makhrov](https://github.com/uptechteam/CleanArchExample) for his [article on Clean Architecture](https://blog.uptech.team/clean-architecture-in-android-with-kotlin-rxjava-dagger-2-2fdc7441edfc);
+* [Sample by Anton Makhrov](https://github.com/uptechteam/CleanArchExample) for his [article on Clean Architecture](https://blog.uptech.team/clean-architecture-in-android-with-kotlin-rxjava-dagger-2-2fdc7441edfc);
 * [Example from google samples](https://github.com/googlesamples/android-architecture/tree/todo-mvp-clean/todoapp);
 * [Clean Architecture sample from Buffer](https://github.com/bufferapp/android-clean-architecture-boilerplate)
 ## When to use?

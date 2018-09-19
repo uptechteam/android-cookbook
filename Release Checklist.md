@@ -1,4 +1,4 @@
-Welcome to this page. Seems like you have a release coming - congratulations!
+Seems like you have a release coming - congratulations!
 Please follow this checklist to make sure you don't forget something important
 
 # Before the release:

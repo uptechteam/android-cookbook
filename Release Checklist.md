@@ -18,5 +18,5 @@ Please follow this checklist to make sure you don't forget something important
 14. Make sure you wrote down credentials for the keystore somewhere or have them safely hidden and recoverable in your mind palace
 
 # After the release:
-15. Pay special attention to the client’s requests during the release time, it’s critical that you react quickly to any issues that occur
-16. Monitor the crash tracking service you’ve integrated on step 5 for at least 3 days after the release
+1. Pay special attention to the client’s requests during the release time, it’s critical that you react quickly to any issues that occur
+2. Monitor the crash tracking service you’ve integrated on step 5 for at least 3 days after the release

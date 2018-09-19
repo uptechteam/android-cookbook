@@ -13,10 +13,10 @@ Please follow this checklist to make sure you don't forget something important
 9. Prepare the Release Notes
 10. Follow git flow to make sure you branches are not messed up
 11. Turn off debug logs to avoid security breaches
-12. Check that constants for all integrated services are for prod
-13. Make sure you’ve build a Prod APK
+12. Check that constants for all integrated services are for Production
+13. Make sure you’ve build a Production APK
 14. Make sure you wrote down credentials for the keystore somewhere or have them safely hidden and recoverable in your mind palace
 
 # After the release:
-1. Pay special attention to the client’s requests during the release time, it’s critical that you react quickly to any issues that occur
-2. Monitor the crash tracking service you’ve integrated on step 5 for at least 3 days after the release
+1. Pay special attention to the client’s requests during the release time, it’s critical that you react quickly to any issues if they occur
+2. Constantly monitor the crash tracking service you’ve integrated for at least 3 days after the release

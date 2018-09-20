@@ -13,9 +13,10 @@ Please follow this checklist to make sure you don't forget something important
 9. Prepare the Release Notes
 10. Follow git flow to make sure you branches are not messed up
 11. Turn off debug logs to avoid security breaches
-12. Check that constants for all integrated services are for Production
-13. Make sure you’ve built a Production APK
-14. Make sure you wrote down credentials for the keystore in a safe place
+12. Make sure no debug tools (like Stetho, Chuck, etc) are enabled in the release build
+13. Check that constants for all integrated services are for Production
+14. Make sure you’ve built a Production APK
+15. Make sure you wrote down credentials for the keystore in a safe place
 
 # After the release:
 1. Pay special attention to the client’s requests during the release time, it’s critical that you react quickly to any issues if they occur

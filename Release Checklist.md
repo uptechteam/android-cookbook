@@ -2,8 +2,8 @@ Seems like you have a release coming - congratulations!
 Please follow this checklist to make sure you don't forget something important
 
 # Before the release:
-1. Verify with the client that the current build is OK to submit
-2. Check the version name: should be increased compared to the previous release OR should be the value the client needs (not 0.0.1 instead of 1.0, for example)
+1. Verify with the client that the current build is ready to submit
+2. Check the version name: should be increased compared to the previous release OR should be the value the client needs (not 0.1 instead of 1.0, for example)
 3. Install and check the build itself: should be the latest one
 4. Run a regression testing for critical features
 5. Integrate some crash tracking service: Crashlytics, HockeyApp, etc
@@ -14,8 +14,8 @@ Please follow this checklist to make sure you don't forget something important
 10. Follow git flow to make sure you branches are not messed up
 11. Turn off debug logs to avoid security breaches
 12. Check that constants for all integrated services are for Production
-13. Make sure you’ve build a Production APK
-14. Make sure you wrote down credentials for the keystore somewhere or have them safely hidden and recoverable in your mind palace
+13. Make sure you’ve built a Production APK
+14. Make sure you wrote down credentials for the keystore in a safe place
 
 # After the release:
 1. Pay special attention to the client’s requests during the release time, it’s critical that you react quickly to any issues if they occur

@@ -18,3 +18,4 @@ Please follow this checklist to make sure you don't forget something important.
 14. Make sure you’ve built a Production APK.
 15. Make sure you wrote down credentials for the keystore in a safe place.
 16. Consider starting with a staged roll-out to do a rollback in case any problems occur.
+17. If it's an incremental release (an update to the existing app) check for backward compatibility with the previous version: install the previous APK and then on top of it the new APK. An example of things to check is a DB migration.

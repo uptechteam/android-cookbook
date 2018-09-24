@@ -1,5 +1,4 @@
 # Hello World!
-No, seriously - hello there!
 
 The fact that you're here means you want to *read* this cookbook or even *add something to it*. You're very welcome to do any of those things! :)
 This Readme is intended to help you get started.
@@ -31,7 +30,7 @@ A bit more steps here, but don't worry, still not that many to close the page ri
     - *MVVM.md*   
   
 **Step 4.** After you've finished adding information and you are ready to present your work to the team, **create a Pull Request to master** from your branch and **request reviews from all team members** on that PR. This is important, since we want everyone to use this cookbook and thus be aware of the recommendations we keep here.  
-*Hint: you can easily do it by typing android in the reviewer's input and choosing uptechteam/android: it will automatically request reviews from all Android team.*  
+*Hint: you can easily do it by typing android in the reviewer's input and choosing uptechteam/android: it will automatically request reviews from all the Android team.*  
   
 **Step 5.** After **everyone approves your PR**, feel free to **merge your Pull Request** and **delete the branch**.  
 **There is no Step 6.**   

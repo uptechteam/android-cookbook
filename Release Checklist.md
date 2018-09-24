@@ -8,10 +8,10 @@ Please follow this checklist to make sure you don't forget something important.
 4. Run a regression testing for critical features.
 5. Integrate some crash tracking service: Crashlytics, HockeyApp, etc.
 6. Integrate any analytics if needed.
-7. Take into account time for the app’s review by Play Store when planning the release date.
+7. Take into account the time for the app’s review by Play Store when planning the release date.
 8. Make sure the app’s logo looks ok on all devices.
 9. Prepare the Release Notes.
-10. Follow git flow to make sure you branches are not messed up.
+10. Follow git flow to make sure your branches are not messed up.
 11. Turn off debug logs to avoid security breaches.
 12. Make sure no debug tools (like Stetho, Chuck, etc) are enabled in the release build.
 13. Check that constants for all integrated services are for Production.

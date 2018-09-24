@@ -2,7 +2,7 @@ Seems like you have a release coming - congratulations!
 Please follow this checklist to make sure you don't forget something important.
 
 # Before the release:
-1. Verify with the client that the current build is ready to submit.
+1. Verify with the client that the current build is ready to be submitted.
 2. Check the version name: should be increased compared to the previous release OR should be the value the client needs (not 0.1 instead of 1.0, for example).
 3. Install and check the build itself: should be the latest one.
 4. Run a regression testing for critical features.

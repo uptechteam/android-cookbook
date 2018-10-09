@@ -56,3 +56,4 @@ Some functional testing techniques include smoke testing, white box testing, bla
 * https://developer.android.com/training/testing/fundamentals
 * https://developer.android.com/training/testing/unit-testing/local-unit-tests
 * https://developer.android.com/training/testing/espresso/
+* https://www.youtube.com/watch?v=pK7W5npkhho

@@ -34,6 +34,14 @@ You should have fewer integration tests than unit tests. You should mainly use t
 
 Integration tests can usually be written with the same tools as unit tests.
 
+**Examples:**
+* requesting data from network and saving it to the database;
+* [Android components](https://developer.android.com/training/testing/integration-testing);
+* purchasing flow;
+* game flow;
+* full login flow;
+* basically anything that you can describe with the "flow" word.
+
 ## Functional tests
 Functional testing is a software testing process used within software development in which software is tested to ensure that it conforms with all requirements. Functional testing is a way of checking software to ensure that it has all the required functionality that's specified within its functional requirements.
 

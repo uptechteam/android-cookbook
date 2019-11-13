@@ -1,3 +1,4 @@
+![image](https://miro.medium.com/max/1994/1*OEX52nKgM1SHGO4l1mvV1A.gif)
 ## Table of contents
 1. :abcd: [Basics](https://github.com/uptechteam/android-cookbook/blob/chapter/coroutines/Coroutines/1_Basics.md)
 2. :microscope: [Coroutine Scope](https://github.com/uptechteam/android-cookbook/blob/chapter/coroutines/Coroutines/2_CoroutineScope.md)

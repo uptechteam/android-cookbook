@@ -14,7 +14,8 @@ Every coroutine builder is an extension function defined on the `CoroutineScope
 ```
 It is defined as an extension function on `CoroutineScope` and takes a `CoroutineContext` as a parameter, so it actually takes two coroutine contexts (since a scope is just a reference to a context). What does it do with them? It merges them using plus operator (see [Coroutine Context](https://www.notion.so/1d06521b-f797-48ed-ba8f-a2397b87660b) chapter), producing a set-union of their elements, so that the elements in context parameter are taking precedence over the elements from the scope. The resulting context is used to start a new coroutine, but it is not the context of the new coroutine — is the parent context of the new coroutine. The new coroutine creates its own child `Job` instance (using a job from this context as its parent) and defines its child context as a parent context `plus` its job:
 
-[](https://www.notion.so/ffb5021cb7e5441e86876407b79f09ce#d71914560d4a4ecc93ccb6dab9b25d2b)
+![](https://miro.medium.com/max/4596/1*zuX5Ozc2TwofXlmDajxpzg.png)
+
 
 The intended purpose of `CoroutineScope` receiver in the `launch` and in all the other coroutine builders is to reference a scope in which new coroutine is launched. By convention, a context in `CoroutineScope` contains a Job that is going to become a parent of a new coroutine (exception `GlobalScope`).
 

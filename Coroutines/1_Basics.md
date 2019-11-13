@@ -14,7 +14,7 @@ Coroutine — is an *instance* of *suspendable computation*. It is similar to a 
 
 A modifier `suspend` may be used on any function: top-level function, extension function, member function, local function, or operator function.
 
-Property getters and setters, constructors, and some operators functions (namely `getValue`, `setValue`, `provideDelegate`, `get`, `set`, and `equals`) cannot have `suspend` modifier. These restrictions may be lifted in the future.
+>Property getters and setters, constructors, and some operators functions (namely `getValue`, `setValue`, `provideDelegate`, `get`, `set`, and `equals`) cannot have `suspend` modifier. These restrictions may be lifted in the future.
 
 ## **Suspending lambda:**
 

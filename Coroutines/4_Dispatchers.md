@@ -26,7 +26,7 @@ Output (order may differ):
     newSingleThreadContext: I'm working in thread MyOwnThread
     main runBlocking      : I'm working in thread main
 ```
-When `launc` is used without parameters, it inherits the context (and thus dispatcher) from the [CoroutineScope](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html) it is being launched from. In this case, it inherits the context of the main `runBlocking` coroutine which runs in the `main` thread.
+When `launch` is used without parameters, it inherits the context (and thus dispatcher) from the [CoroutineScope](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html) it is being launched from. In this case, it inherits the context of the main `runBlocking` coroutine which runs in the `main` thread.
 
 [Dispatchers.Unconfined](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-dispatchers/-unconfined.html) is a special dispatcher that runs in a thread it was launched from, thus also `main`.
 

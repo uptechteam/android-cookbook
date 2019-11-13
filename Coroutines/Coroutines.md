@@ -4,6 +4,7 @@
 2. :microscope: [Coroutine Scope](#coroutine-scope)
 3. :family_man_woman_girl_boy: [Coroutine Context](#coroutine-context)
 4. :twisted_rightwards_arrows: [Dispatchers](#dispatchers)
+5. [Channels](#channels)
 5. :exclamation: [Error handling (CoroutineExceptionHandler)](#error-handling)
 6. :books: [Materials](#materials)
 

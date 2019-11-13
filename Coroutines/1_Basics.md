@@ -68,7 +68,7 @@ Coroutines always execute in some context represented by a value of the [Corouti
 
 - Is a set of elements (threading policy, logging, security and transaction aspects of the coroutine execution, coroutine identity and name, etc)
 - Immutable
-- Can be composed  (see [Coroutine Context](https://www.notion.so/1d06521b-f797-48ed-ba8f-a2397b87660b)  chapter)
+- Can be composed  (see [Coroutine Context](https://github.com/uptechteam/android-cookbook/blob/chapter/coroutines/Coroutines/3_CoroutineContext.md)  chapter)
 
 Conceptually, coroutine context is an indexed set of elements, where each element has a unique key. It is a mix between a set and a map. Its elements have keys like in a map, but its keys are directly associated with elements, more like in a set. 
 
@@ -92,7 +92,7 @@ Or use delegation with default factory functions:
 
 ## Coroutine Dispatcher
 
-Dispatchers determine what thread or thread pool the coroutine uses for execution. The dispatcher can confine a coroutine to a specific thread. It can also dispatch it to a thread pool. Less commonly, it can allow a coroutine to run unconfined, without a specific threading rule, which can be unpredictable (see [Dispatchers](https://www.notion.so/3d142124-e287-4b53-82df-f386c2bd49d0) chapter).
+Dispatchers determine what thread or thread pool the coroutine uses for execution. The dispatcher can confine a coroutine to a specific thread. It can also dispatch it to a thread pool. Less commonly, it can allow a coroutine to run unconfined, without a specific threading rule, which can be unpredictable (see [Dispatchers](https://github.com/uptechteam/android-cookbook/blob/chapter/coroutines/Coroutines/4_Dispatchers.md) chapter).
 
 Common Dispatchers:
 

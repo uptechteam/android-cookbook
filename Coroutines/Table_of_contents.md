@@ -1,5 +1,5 @@
 ## Table of contents
-1. :one::zero::one: [What are coroutines? Basics](https://github.com/uptechteam/android-cookbook/blob/chapter/coroutines/Coroutines/1_Basics.md)
+1. :one::zero::one: [Basics](https://github.com/uptechteam/android-cookbook/blob/chapter/coroutines/Coroutines/1_Basics.md)
 2. :microscope:[Coroutine Scope](https://github.com/uptechteam/android-cookbook/blob/chapter/coroutines/Coroutines/2_CoroutineScope.md)
 3. :family_man_woman_girl_boy:[Coroutine Context](https://github.com/uptechteam/android-cookbook/blob/chapter/coroutines/Coroutines/3_CoroutineContext.md)
 4. :twisted_rightwards_arrows:[Dispatchers](https://github.com/uptechteam/android-cookbook/blob/chapter/coroutines/Coroutines/4_Dispatchers.md)

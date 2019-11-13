@@ -1,11 +1,11 @@
 ## Table of contents
-1. [What are coroutines? Basics](https://github.com/uptechteam/android-cookbook/blob/chapter/coroutines/Coroutines/1_Basics.md)
-2. [Coroutine Scope](https://github.com/uptechteam/android-cookbook/blob/chapter/coroutines/Coroutines/2_CoroutineScope.md)
-3. [Coroutine Context](https://github.com/uptechteam/android-cookbook/blob/chapter/coroutines/Coroutines/3_CoroutineContext.md)
-4. [Dispatchers](https://github.com/uptechteam/android-cookbook/blob/chapter/coroutines/Coroutines/4_Dispatchers.md)
-5. [Error handling (CoroutineExceptionHandler)](https://github.com/uptechteam/android-cookbook/blob/chapter/coroutines/Coroutines/5_ErrorHandling.md)
+1. :one::zero::one: [What are coroutines? Basics](https://github.com/uptechteam/android-cookbook/blob/chapter/coroutines/Coroutines/1_Basics.md)
+2. :microscope:[Coroutine Scope](https://github.com/uptechteam/android-cookbook/blob/chapter/coroutines/Coroutines/2_CoroutineScope.md)
+3. :family_man_woman_girl_boy:[Coroutine Context](https://github.com/uptechteam/android-cookbook/blob/chapter/coroutines/Coroutines/3_CoroutineContext.md)
+4. :twisted_rightwards_arrows:[Dispatchers](https://github.com/uptechteam/android-cookbook/blob/chapter/coroutines/Coroutines/4_Dispatchers.md)
+5. :exclamation:[Error handling (CoroutineExceptionHandler)](https://github.com/uptechteam/android-cookbook/blob/chapter/coroutines/Coroutines/5_ErrorHandling.md)
 
-## Materials: 
+## :books: Materials: 
 
 * [KEEP Kotlin Evolution and Enhancement Process](https://github.com/Kotlin/KEEP/blob/master/proposals/coroutines.md)
 * [Coroutines ~~advanced~~ tutorial Ray Wenderlich](https://www.raywenderlich.com/2117501-kotlin-coroutines-tutorial-for-android-advanced)

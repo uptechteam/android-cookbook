@@ -1,11 +1,11 @@
+## Table of contents
 1. [What are coroutines? Basics](https://github.com/uptechteam/android-cookbook/blob/chapter/coroutines/Coroutines/1_Basics.md)
-2. [Coroutine Scope]
-3. [Coroutine Context]
-4. [Dispatchers]
-5. [Error handling (CoroutineExceptionHandler)]
+2. [Coroutine Scope](https://github.com/uptechteam/android-cookbook/blob/chapter/coroutines/Coroutines/2_CoroutineScope.md)
+3. [Coroutine Context](https://github.com/uptechteam/android-cookbook/blob/chapter/coroutines/Coroutines/3_CoroutineContext.md)
+4. [Dispatchers](https://github.com/uptechteam/android-cookbook/blob/chapter/coroutines/Coroutines/4_Dispatchers.md)
+5. [Error handling (CoroutineExceptionHandler)](https://github.com/uptechteam/android-cookbook/blob/chapter/coroutines/Coroutines/5_ErrorHandling.md)
 
-
-Materials: 
+## Materials: 
 
 * [KEEP Kotlin Evolution and Enhancement Process](https://github.com/Kotlin/KEEP/blob/master/proposals/coroutines.md)
 * [Coroutines ~~advanced~~ tutorial Ray Wenderlich](https://www.raywenderlich.com/2117501-kotlin-coroutines-tutorial-for-android-advanced)

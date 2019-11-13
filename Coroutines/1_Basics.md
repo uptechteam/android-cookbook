@@ -42,18 +42,18 @@ Examples: launch, async, produce, runBlocking (provide links)
 2. Syntactically - invocation of suspending function
 
 ## **Continuation:**
-
+```kotlin
     interface Continuation<in T> {
     		val context: CoroutineContext
     		fun resumeWith(result: Result<T>)
     }
-
+```
 1. Represents state of coroutine at suspension point.
 2. Can be resumed using completion callback used to report success or failure of coroutine.
 3. Can be resumed only once
 
 In the snippet below, an existing asynchronous API service that uses callbacks is wrapped into a suspending function, and it propagates the result or error using a Continuation. It’s just an example function, but the idea is there.
-
+```kotlin
     suspend fun <Data, Result> suspendAsyncApi(data: Data): Result =
       suspendCancellableCoroutine { continuation ->
         apiService.doAsyncStuff<Data, Result>(data,
@@ -61,7 +61,7 @@ In the snippet below, an existing asynchronous API service that uses callbacks i
             { error -> continuation.resumeWithException(error) } // resume with an error
         )
       }
-
+```
 ## CoroutineContext
 
 Coroutines always execute in some context represented by a value of the [CoroutineContext](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/) type, defined in the Kotlin standard library.
@@ -77,7 +77,7 @@ Conceptually, coroutine context is an indexed set of elements, where each elemen
 `CoroutineScope`s confine new coroutines by providing a lifecycle-bound component that binds to a coroutine. Every coroutine builder is an extension function defined on the `CoroutineScope` type. `launch()` is an example of a coroutine builder.
 
 Example - `GlobalScope`(Avoid using it). It’s useful for top-level coroutines that operate on the entire app lifetime and aren’t bound to any lifecycle. Typically, you’d use `CoroutineScope` in your `Activity`, `Fragment` or `ViewModel` over `GlobalScope` in an Android app to control when lifecycle events occur.
-
+```kotlin
     class Activity {
         private val mainScope = MainScope()
         
@@ -85,11 +85,11 @@ Example - `GlobalScope`(Avoid using it). It’s useful for top-level coroutines
             mainScope.cancel()
         }
     }
-
+```
 Or use delegation with default factory functions:
-
+```kotlin
     class Activity : CoroutineScope by CoroutineScope(Dispatchers.Default) {}
-
+```
 ## Coroutine Dispatcher
 
 Dispatchers determine what thread or thread pool the coroutine uses for execution. The dispatcher can confine a coroutine to a specific thread. It can also dispatch it to a thread pool. Less commonly, it can allow a coroutine to run unconfined, without a specific threading rule, which can be unpredictable (see [Dispatchers](https://github.com/uptechteam/android-cookbook/blob/chapter/coroutines/Coroutines/4_Dispatchers.md) chapter).

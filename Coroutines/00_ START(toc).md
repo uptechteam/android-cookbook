@@ -80,7 +80,7 @@ Great explanation what the `GlobalScope` is and how it affects your coroutine ex
 
 
 
-# :books: Materials: 
+# Materials 
 
 * [KEEP Kotlin Evolution and Enhancement Process](https://github.com/Kotlin/KEEP/blob/master/proposals/coroutines.md)
 * [Coroutines ~~advanced~~ tutorial Ray Wenderlich](https://www.raywenderlich.com/2117501-kotlin-coroutines-tutorial-for-android-advanced)

@@ -5,7 +5,13 @@ Coroutine — is an *instance* of *suspendable computation*. It is similar to a 
 
 ## **Suspending function:**
 
-**(Function example here)**
+```kotlin
+suspend fun simpleSuspendFunction() : Int { //can suspend coroutine execution
+  delay(100)
+  print(".")
+  return 1
+}
+```
 
 1. Has `suspend` modifier.
 2. Doesn’t block the thread
@@ -18,7 +24,12 @@ A modifier `suspend` may be used on any function: top-level function, extension 
 
 ## **Suspending lambda:**
 
-**(Lambda example, launch, future, sequence, runBlocking)**
+```kotlin
+launch { //lambda starts here
+    delay(100)
+    println("Work done!")
+}
+```
 
 1. Similar to ordinary [lambda expression](https://kotlinlang.org/docs/reference/lambdas.html)
 2. Doesn’t block the thread
@@ -26,13 +37,28 @@ A modifier `suspend` may be used on any function: top-level function, extension 
 
 ## **Coroutine builder:**
 
-**(Coroutine builder example: launch, async, produce, runBlocking, sequence, etc..)**
+```kotlin
+launch { //lambda starts here
+    delay(100)
+    println("Work done!")
+}
+```
 
+```kotlin
+async(Dispatchers.Default) {
+    delay(100)
+    return@async 11
+}
+```
 1. Takes *suspending lambda* as an argument
 2. Creates coroutine
 3. Gives access to coroutine result (Optional)
 
-Examples: launch, async, produce, runBlocking (provide links)
+Examples: [launch](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/launch.html), [async](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/async.html), [produce](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.channels/produce.html), [runBlocking](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/run-blocking.html), [actor](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.channels/actor.html)
+
+More extensions can be found [here](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/)
+
+![dddd](./Screen Shot 2019-12-13 at 2.57.25 PM.png)
 
 ## **Suspension point:**
 
@@ -44,8 +70,8 @@ Examples: launch, async, produce, runBlocking (provide links)
 ## **Continuation:**
 ```kotlin
     interface Continuation<in T> {
-    		val context: CoroutineContext
-    		fun resumeWith(result: Result<T>)
+      val context: CoroutineContext
+      fun resumeWith(result: Result<T>)
     }
 ```
 1. Represents state of coroutine at suspension point.
@@ -54,13 +80,13 @@ Examples: launch, async, produce, runBlocking (provide links)
 
 In the snippet below, an existing asynchronous API service that uses callbacks is wrapped into a suspending function, and it propagates the result or error using a Continuation. It’s just an example function, but the idea is there.
 ```kotlin
-    suspend fun <Data, Result> suspendAsyncApi(data: Data): Result =
-      suspendCancellableCoroutine { continuation ->
-        apiService.doAsyncStuff<Data, Result>(data,
-            { result -> continuation.resume(result) }, // resume with a result
-            { error -> continuation.resumeWithException(error) } // resume with an error
-        )
-      }
+suspend fun <Data, Result> suspendAsyncApi(data: Data): Result =
+  suspendCancellableCoroutine { continuation ->
+    apiService.doAsyncStuff<Data, Result>(data,
+        { result -> continuation.resume(result) }, // resume with a result
+        { error -> continuation.resumeWithException(error) } // resume with an error
+    )
+  }
 ```
 ## CoroutineContext
 
@@ -78,17 +104,17 @@ Conceptually, coroutine context is an indexed set of elements, where each elemen
 
 Example - `GlobalScope`(Avoid using it). It’s useful for top-level coroutines that operate on the entire app lifetime and aren’t bound to any lifecycle. Typically, you’d use `CoroutineScope` in your `Activity`, `Fragment` or `ViewModel` over `GlobalScope` in an Android app to control when lifecycle events occur.
 ```kotlin
-    class Activity {
-        private val mainScope = MainScope()
-        
-        fun destroy() {
-            mainScope.cancel()
-        }
+class Activity {
+    private val mainScope = MainScope()
+
+    fun destroy() {
+        mainScope.cancel()
     }
+}
 ```
 Or use delegation with default factory functions:
 ```kotlin
-    class Activity : CoroutineScope by CoroutineScope(Dispatchers.Default) {}
+class Activity : CoroutineScope by CoroutineScope(Dispatchers.Default) {}
 ```
 ## Coroutine Dispatcher
 

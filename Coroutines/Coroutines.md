@@ -58,14 +58,14 @@ Examples: [launch](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutine
 
 More extensions can be found [here](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/)
 
-![dddd](./Screen Shot 2019-12-13 at 2.57.25 PM.png)
-
 ## **Suspension point:**
 
-**(Screenshot of suspension point)**
+![](https://github.com/uptechteam/android-cookbook/blob/chapter/coroutines-basics/Coroutines/Screen%20Shot%202019-12-13%20at%202.57.25%20PM.png)
 
 1. Happens during execution
 2. Syntactically - invocation of suspending function
+
+`delay` is a suspension point thus IDE marks it with specific sign
 
 ## **Continuation:**
 ```kotlin

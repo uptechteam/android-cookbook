@@ -178,7 +178,7 @@ Output:
     transforming 2
     collected 2
 ```
-Check out more examples using intermediate/terminal operators in the sample [project](link to sample project) 
+Check out more examples using intermediate/terminal operators in the sample [project](https://github.com/uptechteam/coroutines-examples) 
 
 ## Flow context
 
@@ -336,4 +336,4 @@ In actual applications a scope will come from an entity with a limited lifetime.
 
 `launchIn` also returns a `Job`, which can be used to cancel the corresponding flow collection coroutine only without cancelling the whole scope or to join it.
 
-Check out more examples in the sample [project](link to sample project)
+Check out more examples in the sample [project](https://github.com/uptechteam/coroutines-examples)

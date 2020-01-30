@@ -8,6 +8,7 @@
 \- [General testing harness](#general-tests-harness)<br/>
 
 ## Automated refactoring
+Refactoring by hand is fine, but when you have a tool that does some refactoring for you, you have a real time saver. Most of the modern IDEs have already integrated them. <br/>
 It pays to choose your refactoring tools with care. Find out what the tool developers say about the safety of their tool. 
 Run your own tests. Refactoring tools should verify that a change does not change behavior, and many of them do.
 

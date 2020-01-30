@@ -19,51 +19,13 @@ In some cases, that is true. If your tool performs safe refactorings and you go 
 you can assume that your edits haven't changed behavior. 
 
 However, this isn't always the case.
+<p align="center">
+	<kbd>
+ 		<img src="https://github.com/uptechteam/android-cookbook/blob/chapter/testing-tools/Testing App/assets/example-tools-highlight.png" alt="preview" width="720" height="230"/>
+	</kbd>
+</p>
 
-```Java
-public class Example {
-
-  private int alpha = 0;
-
-  private int getValue() {
-    alpha++;
-    return 12;
-  }
-
-  public void doSomething() {
-    int v = getValue();
-    int total = 0;
-
-    for (int n = 0; n < 10; n++) {
-      total += v;
-    }
-  }
-
-}
-```
-
-We can use tool to remove the `v` variable from `doSomething`. After the refactoring, the code looks like this:
-```Java
-public class Example {
-
-  private int alpha = 0;
-
-  private int getValue() {
-    alpha++;
-    return 12;
-  }
-
-  public void doSomething() {
-    int total = 0;
-
-    for (int n = 0; n < 10; n++) {
-      total += getValue();
-    }
-  }
-
-}
-```
-See the problem? The variable was removed, but now the value of `alpha` is incremented 10 times rather than 1. This change clearly didn't preserve behavior.
+This change clearly didn't preserve behavior.
 <br/>It is a good idea to have tests around your code before you start to use automated refactoring. You *can* do some automated refactoring without tests, but you have to know what the tool is checking and what it isn't.
 
 ## Mock objects

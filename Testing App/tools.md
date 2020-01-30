@@ -9,7 +9,7 @@
 
 ## Automated refactoring
 It pays to choose your refactoring tools with care. Find out what the tool developers say about the safety of their tool. 
-Run your own tests. 
+Run your own tests. Refactoring tools should verify that a change does not change behavior, and many of them do.
 
 When you attempt to extract a method and give it the name of a method that already exists in that class, does it flag that as an error?
 What if it is the name of a method in a base class - does the tool detect that?<br/>

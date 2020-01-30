@@ -19,6 +19,7 @@ In some cases, that is true. If your tool performs safe refactorings and you go 
 you can assume that your edits haven't changed behavior. 
 
 However, this isn't always the case.
+
 ```Java
 public class Example {
 

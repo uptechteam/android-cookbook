@@ -152,7 +152,7 @@ with(dao.findDesign(1)) {
 ```
 **Helper Functions**</br>
 **Use Helper Functions with Default Arguments to Ease Object Creation**</br>
-In reality, data structures are complex and nested. Creating those objects again and again in the tests can be cumbersome. In those cases, it’s handy to write a utility function that simplifies the creation of the data objects. Kotlin’s default arguments are really nice here as they allow every test to set only the relevant properties and don’t have to care about the remaining ones.
+In reality, data structures are complex and nested. Creating those objects again and again in the tests can be cumbersome. In those cases, it’s handy to write a utility function that simplifies the creation of the `data` objects. Kotlin’s default arguments are really nice here as they allow every test to set only the relevant properties and don’t have to care about the remaining ones.
 ```kotlin
 fun createDesign(
     id: Int = 1,
@@ -179,9 +179,9 @@ val testDesign2 = createDesign(id = 1, name = "Fox")
 val testDesign3 = createDesign(id = 1, name = "Fox", tags = mapOf())
 ```
 This leads to concise and readable object creation code.
-- Don’t add default arguments to the data classes in the production code just to make your tests easier. If they are used only for the tests, they should be located in the test folder. So use helper functions like the one above and set the default arguments there.
-- Don’t use copy() just to ease object creation. Extensive copy() usage is hard to read; especially with nested structures. Prefer the helper functions.
-- Locate all helper functions in a single file like CreationUtils.kt. This way, we can reuse the functions like lego bricks for each test.
+- Don’t add default arguments to the `data` classes in the production code just to make your tests easier. If they are used only for the tests, they should be located in the test folder. So use helper functions like the one above and set the default arguments there.
+- Don’t use `copy()` just to ease object creation. Extensive `copy()` usage is hard to read; especially with nested structures. Prefer the helper functions.
+- Locate all helper functions in a single file like `CreationUtils.kt`. This way, we can reuse the functions like lego bricks for each test.
 
 **Helper Extension Functions for Frequently Used Values**</br>
 I prefer to use fixed values instead of randomized or changing values. But writing code like `Instant.ofEpochSecond(1525420010L)` again and again is annoying and blows the code.

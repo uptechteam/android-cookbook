@@ -8,6 +8,208 @@
 6. :rocket: [Flows](#flows)
 7. :exclamation: [Error handling](#error-handling)
 8. :books: [Materials](#materials)
+
+# Basics
+
+Coroutine — is an *instance* of *suspendable computation*. It is similar to a thread, in the sense that it takes a block of code to run and has a similar lifecycle — it is *created* and *started*, but it is not bound to any particular thread. It may *suspend* its execution in one thread and *resume* in another one. Moreover, like a future or promise, it may *complete* with some result (which is either a value or an exception).
+
+## **Suspending function:**
+
+```kotlin
+suspend fun simpleSuspendFunction() : Int { //can suspend coroutine execution
+  delay(100)
+  print(".")
+  return 1
+}
+```
+
+1. Has `suspend` modifier.
+2. Doesn’t block the thread
+3. Can invoke other suspending functions
+4. Can be invoked from other suspending functions or lambdas
+
+A modifier `suspend` may be used on any function: top-level function, extension function, member function, local function, or operator function.
+
+>Property getters and setters, constructors, and some operators functions (namely `getValue`, `setValue`, `provideDelegate`, `get`, `set`, and `equals`) cannot have `suspend` modifier. These restrictions may be lifted in the future.
+
+## **Suspending lambda:**
+
+```kotlin
+launch { //lambda starts here
+    delay(100)
+    println("Work done!")
+}
+```
+
+1. Similar to ordinary [lambda expression](https://kotlinlang.org/docs/reference/lambdas.html)
+2. Doesn’t block the thread
+3. Can invoke other suspending functions
+
+## **Coroutine builder:**
+
+```kotlin
+launch { //lambda starts here
+    delay(100)
+    println("Work done!")
+}
+```
+
+```kotlin
+async(Dispatchers.Default) {
+    delay(100)
+    return@async 11
+}
+```
+1. Takes *suspending lambda* as an argument
+2. Creates coroutine
+3. Gives access to coroutine result (Optional)
+
+Examples: [launch](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/launch.html), [async](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/async.html), [produce](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.channels/produce.html), [runBlocking](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/run-blocking.html), [actor](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.channels/actor.html)
+
+More extensions can be found [here](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/)
+
+## **Suspension point:**
+
+![](https://github.com/uptechteam/android-cookbook/blob/chapter/coroutines-basics/Coroutines/Screen%20Shot%202019-12-13%20at%202.57.25%20PM.png)
+
+1. Happens during execution
+2. Syntactically - invocation of suspending function
+
+`delay` is a suspension point thus IDE marks it with specific sign
+
+## **Continuation:**
+```kotlin
+    interface Continuation<in T> {
+      val context: CoroutineContext
+      fun resumeWith(result: Result<T>)
+    }
+```
+1. Represents state of coroutine at suspension point.
+2. Can be resumed using completion callback used to report success or failure of coroutine.
+3. Can be resumed only once
+
+In the snippet below, an existing asynchronous API service that uses callbacks is wrapped into a suspending function, and it propagates the result or error using a Continuation. It’s just an example function, but the idea is there.
+```kotlin
+suspend fun <Data, Result> suspendAsyncApi(data: Data): Result =
+  suspendCancellableCoroutine { continuation ->
+    apiService.doAsyncStuff<Data, Result>(data,
+        { result -> continuation.resume(result) }, // resume with a result
+        { error -> continuation.resumeWithException(error) } // resume with an error
+    )
+  }
+```
+## CoroutineContext
+
+Coroutines always execute in some context represented by a value of the [CoroutineContext](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/) type, defined in the Kotlin standard library.
+
+- Is a set of elements (threading policy, logging, security and transaction aspects of the coroutine execution, coroutine identity and name, etc)
+- Immutable
+- Can be composed  (see [Coroutine Context](#coroutine-context)  chapter)
+
+Conceptually, coroutine context is an indexed set of elements, where each element has a unique key. It is a mix between a set and a map. Its elements have keys like in a map, but its keys are directly associated with elements, more like in a set. 
+
+## Coroutine Scope
+
+`CoroutineScope`s confine new coroutines by providing a lifecycle-bound component that binds to a coroutine. Every coroutine builder is an extension function defined on the `CoroutineScope` type. `launch()` is an example of a coroutine builder.
+
+Example - `GlobalScope`(Avoid using it). It’s useful for top-level coroutines that operate on the entire app lifetime and aren’t bound to any lifecycle. Typically, you’d use `CoroutineScope` in your `Activity`, `Fragment` or `ViewModel` over `GlobalScope` in an Android app to control when lifecycle events occur.
+```kotlin
+class Activity {
+    private val mainScope = MainScope()
+
+    fun destroy() {
+        mainScope.cancel()
+    }
+}
+```
+Or use delegation with default factory functions:
+```kotlin
+class Activity : CoroutineScope by CoroutineScope(Dispatchers.Default) {}
+```
+## Coroutine Dispatcher
+
+Dispatchers determine what thread or thread pool the coroutine uses for execution. The dispatcher can confine a coroutine to a specific thread. It can also dispatch it to a thread pool. Less commonly, it can allow a coroutine to run unconfined, without a specific threading rule, which can be unpredictable (see [Dispatchers](#dispatchers) chapter).
+
+Common Dispatchers:
+
+- [Dispatchers.Main](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-dispatchers/-main.html): This dispatcher confines coroutines to the main thread for UI-driven programs, like Swing, JavaFX, or Android apps. **It’s important to note that this dispatcher doesn’t work without adding an environment-specific Main dispatcher dependency in Gradle or Maven**.
+- Use [Dispatchers.Main.immediate](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-main-coroutine-dispatcher/immediate.html) for optimum UI performance on updates.
+- [Dispatchers.Default](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-dispatchers/-default.html): This is the default dispatcher used by standard builders. It’s backed by a shared pool of JVM threads. Use this dispatcher for CPU intensive computations.
+- [Dispatchers.IO](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-dispatchers/-i-o.html): Use this dispatcher for I/O-intensive blocking tasks that uses a shared pool of threads.
+- [Dispatchers.Unconfined](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-dispatchers/-unconfined.html): This dispatcher doesn’t confine coroutines to any specific thread. The coroutine starts the execution in the inherited `CoroutineDispatcher` that called it. But after a suspension ends, it may resume in any other thread.
+- Private thread pools can be created with [newSingleThreadContext](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/new-single-thread-context.html) and [newFixedThreadPoolContext](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/new-fixed-thread-pool-context.html).
+- An arbitrary [Executor](http://docs.oracle.com/javase/8/docs/api/java/util/concurrent/Executor.html) can be converted to dispatcher with [asCoroutineDispatcher](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/java.util.concurrent.-executor/as-coroutine-dispatcher.html) extension function.
+
+# Coroutine Scope
+Taken from [Coroutine Context and Scope](https://medium.com/@elizarov/coroutine-context-and-scope-c8b255d59055#8293).
+
+`CoroutineScope`s confine new coroutines by providing a lifecycle-bound component that binds to a coroutine. Technically it's is an interface that consists of a sole property — `CoroutineContext`. 
+
+It has nothing else but a context. So, why it exists and how is it different from a context itself? The difference between a context and a scope is in their *intended purpose*.
+
+Every coroutine builder is an extension function defined on the `CoroutineScope` type. `Launch` coroutine builder is an example:
+```kotlin
+    fun CoroutineScope.launch(
+        context: CoroutineContext = EmptyCoroutineContext,
+        // ...
+    ): Job
+```
+It is defined as an extension function on `CoroutineScope` and takes a `CoroutineContext` as a parameter, so it actually takes two coroutine contexts (since a scope is just a reference to a context). What does it do with them? It merges them using plus operator (see [Coroutine Context](#coroutine-context) chapter), producing a set-union of their elements, so that the elements in context parameter are taking precedence over the elements from the scope. The resulting context is used to start a new coroutine, but it is not the context of the new coroutine — is the parent context of the new coroutine. The new coroutine creates its own child `Job` instance (using a job from this context as its parent) and defines its child context as a parent context `plus` its job:
+
+![](https://miro.medium.com/max/4596/1*zuX5Ozc2TwofXlmDajxpzg.png)
+
+
+The intended purpose of `CoroutineScope` receiver in the `launch` and in all the other coroutine builders is to reference a scope in which new coroutine is launched. By convention, a context in `CoroutineScope` contains a Job that is going to become a parent of a new coroutine (exception `GlobalScope`).
+
+On the other hand, the intended purpose of context: `CoroutineContext` parameter in `launch` is to provide additional context elements to override elements that would be otherwise inherited from a parent scope. For example:
+```kotlin
+    launch(CoroutineName("child")) {
+        println("My context is $coroutineContext}")        
+    }
+```
+Since the context and the scope are materially the same things, we could have launched a coroutine without having access to the scope and without using `GlobalScope` simply by wrapping the current coroutine context into the instance of `CoroutineScope` as shown in the following function:
+```kotlin
+    suspend fun doNotDoThis() {
+        CoroutineScope(coroutineContext).launch {
+            println("I'm confused")
+        }
+    }
+```
+**Do not do this!** It makes the scope in which the coroutine is launched opaque and implicit, capturing some outer Job to launch a new coroutine without explicitly announcing it in the function signature.
+
+If you need to launch a coroutine that keeps running after your function returns, then make your function an extension of `CoroutineScope` or pass scope: `CoroutineScope` as a parameter to make your intent clear in your function signature. Do not make these functions suspending:
+```kotlin
+    fun CoroutineScope.doThis() {
+        launch { println("I'm fine") }
+    }
+    
+    fun doThatIn(scope: CoroutineScope) {
+        scope.launch { println("I'm fine, too") }
+    }
+```
+### Statements to remember:
+
+- Suspending functions are designed to be non-blocking and should not have side-effects of launching any concurrent work. Suspending functions can and should wait for all their work to complete before returning to the caller.
+- Every function that is declared as an extension on CoroutineScope returns immediately, but performs its actions concurrently with the rest of the program. (that's why `returnBlocking` is not an extension function on `CoroutineScope`)
+
+## Global Scope
+
+Great explanation what the `GlobalScope` is and how it affects your coroutine execution by Roman Elizarov: [The reason to avoid GlobalScope](https://medium.com/@elizarov/the-reason-to-avoid-globalscope-835337445abc)
+
+## Key points
+
+- All coroutines are required to be launched in the context of [`CoroutineScope`](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html) or to specify a scope explicitly.
+- By default `GlobalScope` uses `Dispatchers.Default` to execute coroutines.
+- Coroutines launched using `GlobalScope` don't have parent job so it's developers responsibility to handle coroutine's `Job`. Example:
+```kotlin
+    val jobs = mutableListOf<Job>()
+    for (i in 1..2) {
+        jobs += GlobalScope.launch {
+            work(i)
+        }
+    }
+    jobs.forEach { it.join() }
+```
 # Coroutine Context
 
 Every coroutine in Kotlin has a context that is represented by an instance of CoroutineContext interface. Coroutine context is a persistent set of user-defined objects that can be attached to the coroutine. It may include objects responsible for coroutine threading policy, logging, security and transaction aspects of the coroutine execution, coroutine identity and name, etc. 
@@ -85,77 +287,6 @@ The definition of context `Key` as a companion object of the corresponding eleme
     }
 ```
 It uses a top-level [`coroutineContext`](http://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/coroutine-context.html) property that is available in suspending functions to retrieve the context of the current coroutine.
-
-# Coroutine Scope
-Taken from [Coroutine Context and Scope](https://medium.com/@elizarov/coroutine-context-and-scope-c8b255d59055#8293).
-
-`CoroutineScope`s confine new coroutines by providing a lifecycle-bound component that binds to a coroutine. Technically it's is an interface that consists of a sole property — `CoroutineContext`. 
-
-It has nothing else but a context. So, why it exists and how is it different from a context itself? The difference between a context and a scope is in their *intended purpose*.
-
-Every coroutine builder is an extension function defined on the `CoroutineScope` type. `Launch` coroutine builder is an example:
-```kotlin
-    fun CoroutineScope.launch(
-        context: CoroutineContext = EmptyCoroutineContext,
-        // ...
-    ): Job
-```
-It is defined as an extension function on `CoroutineScope` and takes a `CoroutineContext` as a parameter, so it actually takes two coroutine contexts (since a scope is just a reference to a context). What does it do with them? It merges them using plus operator (see [Coroutine Context](#coroutine-context) chapter), producing a set-union of their elements, so that the elements in context parameter are taking precedence over the elements from the scope. The resulting context is used to start a new coroutine, but it is not the context of the new coroutine — is the parent context of the new coroutine. The new coroutine creates its own child `Job` instance (using a job from this context as its parent) and defines its child context as a parent context `plus` its job:
-
-![](https://miro.medium.com/max/4596/1*zuX5Ozc2TwofXlmDajxpzg.png)
-
-
-The intended purpose of `CoroutineScope` receiver in the `launch` and in all the other coroutine builders is to reference a scope in which new coroutine is launched. By convention, a context in `CoroutineScope` contains a Job that is going to become a parent of a new coroutine (exception `GlobalScope`).
-
-On the other hand, the intended purpose of context: `CoroutineContext` parameter in `launch` is to provide additional context elements to override elements that would be otherwise inherited from a parent scope. For example:
-```kotlin
-    launch(CoroutineName("child")) {
-        println("My context is $coroutineContext}")        
-    }
-```
-Since the context and the scope are materially the same things, we could have launched a coroutine without having access to the scope and without using `GlobalScope` simply by wrapping the current coroutine context into the instance of `CoroutineScope` as shown in the following function:
-```kotlin
-    suspend fun doNotDoThis() {
-        CoroutineScope(coroutineContext).launch {
-            println("I'm confused")
-        }
-    }
-```
-**Do not do this!** It makes the scope in which the coroutine is launched opaque and implicit, capturing some outer Job to launch a new coroutine without explicitly announcing it in the function signature.
-
-If you need to launch a coroutine that keeps running after your function returns, then make your function an extension of `CoroutineScope` or pass scope: `CoroutineScope` as a parameter to make your intent clear in your function signature. Do not make these functions suspending:
-```kotlin
-    fun CoroutineScope.doThis() {
-        launch { println("I'm fine") }
-    }
-    
-    fun doThatIn(scope: CoroutineScope) {
-        scope.launch { println("I'm fine, too") }
-    }
-```
-### Statements to remember:
-
-- Suspending functions are designed to be non-blocking and should not have side-effects of launching any concurrent work. Suspending functions can and should wait for all their work to complete before returning to the caller.
-- Every function that is declared as an extension on CoroutineScope returns immediately, but performs its actions concurrently with the rest of the program. (that's why `returnBlocking` is not an extension function on `CoroutineScope`)
-
-## Global Scope
-
-Great explanation what the `GlobalScope` is and how it affects your coroutine execution by Roman Elizarov: [The reason to avoid GlobalScope](https://medium.com/@elizarov/the-reason-to-avoid-globalscope-835337445abc)
-
-## Key points
-
-- All coroutines are required to be launched in the context of [`CoroutineScope`](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html) or to specify a scope explicitly.
-- By default `GlobalScope` uses `Dispatchers.Default` to execute coroutines.
-- Coroutines launched using `GlobalScope` don't have parent job so it's developers responsibility to handle coroutine's `Job`. Example:
-```kotlin
-    val jobs = mutableListOf<Job>()
-    for (i in 1..2) {
-        jobs += GlobalScope.launch {
-            work(i)
-        }
-    }
-    jobs.forEach { it.join() }
-```
 
 # Dispatchers
 
@@ -989,5 +1120,4 @@ Output:
 * [Reason to avoid `GlobalScope` by Roman Elizarov](https://medium.com/@elizarov/the-reason-to-avoid-globalscope-835337445abc)
 * [Explicit concurency by Roman Elizarov](https://medium.com/@elizarov/explicit-concurrency-67a8e8fd9b25)
 * [Blocking threads, suspending coroutines by Roman Elizarov](https://medium.com/@elizarov/blocking-threads-suspending-coroutines-d33e11bf4761)
-
 

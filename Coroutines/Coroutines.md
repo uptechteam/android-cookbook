@@ -1,4 +1,16 @@
 
+![image](https://miro.medium.com/max/1994/1*OEX52nKgM1SHGO4l1mvV1A.gif)
+# Table of contents
+1. :abcd: [Basics](#basics)
+2. :microscope: [Coroutine Scope](#coroutine-scope)
+3. :family_man_woman_girl_boy: [Coroutine Context](#coroutine-context)
+4. :twisted_rightwards_arrows: [Dispatchers](#dispatchers)
+5. :handshake: [Channels](#channels)
+6. :rocket: [Flows](#flows)
+7. :exclamation: [Error handling](#error-handling)
+8. :books: [Materials](#materials)
+
+
 # Flows
 
 Suspending functions asynchronously returns a single value, `sequence` builder allows us to build lazily evaluated collections but how do we build an **asynchronous** lazily evaluated collection? That's where [Flows](https://kotlinlang.org/docs/reference/coroutines/flow.html) come into action! Let's check an example:
@@ -561,4 +573,3 @@ Output:
 * [Reason to avoid `GlobalScope` by Roman Elizarov](https://medium.com/@elizarov/the-reason-to-avoid-globalscope-835337445abc)
 * [Explicit concurency by Roman Elizarov](https://medium.com/@elizarov/explicit-concurrency-67a8e8fd9b25)
 * [Blocking threads, suspending coroutines by Roman Elizarov](https://medium.com/@elizarov/blocking-threads-suspending-coroutines-d33e11bf4761)
-

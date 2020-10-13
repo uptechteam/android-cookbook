@@ -1,0 +1,3 @@
+[submodule "coroutines-examples"]
+	path = coroutines-examples
+	url = https://github.com/uptechteam/coroutines-examples
